@@ -1,4 +1,4 @@
 package com.progWeb.SorteioOnline.DTO.Response;
 
-public class LoginResponse {
+public record LoginResponseDTO(String token) {
 }
