@@ -1,6 +1,7 @@
 package com.progWeb.SorteioOnline.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +16,10 @@ public class UserModel implements UserDetails{
     private Long id;
     @Column(nullable = false)
     private String nome;
+    @Column(unique = true ,nullable = false)
+    @Email
     private String email;
+    @Column(nullable = false)
     private String senha;
 
     //gat e set
@@ -48,7 +52,7 @@ public class UserModel implements UserDetails{
     }
 
     public void setSenha(String senha) {
-        senha = senha;
+        this.senha = senha;
     }
 
     //UserDetails

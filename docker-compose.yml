@@ -1,5 +1,3 @@
-# Use postgres/example user/password credentials
-
 services:
   postgresql:
     container_name: 'meucontainer'
