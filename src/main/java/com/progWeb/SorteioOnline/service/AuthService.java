@@ -3,7 +3,7 @@ package com.progWeb.SorteioOnline.service;
 import com.progWeb.SorteioOnline.DTO.Response.LoginResponseDTO;
 import com.progWeb.SorteioOnline.DTO.Response.RegisterResponseDTO;
 import com.progWeb.SorteioOnline.DTO.request.LoginRequestDTO;
-import com.progWeb.SorteioOnline.DTO.request.ResgisterRequestDTO;
+import com.progWeb.SorteioOnline.DTO.request.RegisterRequestDTO;
 import com.progWeb.SorteioOnline.config.TonkenConfig;
 import com.progWeb.SorteioOnline.model.UsuarioModel;
 import com.progWeb.SorteioOnline.repository.UsuarioRepository;
@@ -37,7 +37,7 @@ public class AuthService {
         return new LoginResponseDTO(token);
     }
 
-    public RegisterResponseDTO newUser(ResgisterRequestDTO request){
+    public RegisterResponseDTO newUser(RegisterRequestDTO request){
         UsuarioModel user = new UsuarioModel();
 
         user.setNome(request.nome());
