@@ -25,9 +25,9 @@ public class SorteioModel {
     @ManyToOne
     @JoinColumn(name = "criador_id")
     @JsonIgnore
-    private UserModel criador;
+    private UsuarioModel criador;
 
     @ManyToMany(mappedBy = "sorteiosParticipando")
     @JsonIgnore
-    private List<UserModel> participante = new ArrayList<>();
+    private List<UsuarioModel> participante = new ArrayList<>();
 }

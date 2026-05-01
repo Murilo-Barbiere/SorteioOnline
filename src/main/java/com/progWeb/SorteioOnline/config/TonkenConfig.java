@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.progWeb.SorteioOnline.DTO.JWTUserData;
-import com.progWeb.SorteioOnline.model.UserModel;
+import com.progWeb.SorteioOnline.model.UsuarioModel;
 import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class TonkenConfig {
     private String secret = "secret";
     Algorithm algorithm = Algorithm.HMAC256(secret);
 
-    public  String generateToken(UserModel user){
+    public  String generateToken(UsuarioModel user){
         return JWT.create()
                 .withClaim("userId", user.getId())
                 .withSubject(user.getEmail())

@@ -3,10 +3,9 @@ package com.progWeb.SorteioOnline.service;
 import com.progWeb.SorteioOnline.DTO.JWTUserData;
 import com.progWeb.SorteioOnline.DTO.request.SorteioRequestDTO;
 import com.progWeb.SorteioOnline.model.SorteioModel;
-import com.progWeb.SorteioOnline.model.UserModel;
+import com.progWeb.SorteioOnline.model.UsuarioModel;
 import com.progWeb.SorteioOnline.repository.SorteioRepository;
-import com.progWeb.SorteioOnline.repository.UserRepository;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.progWeb.SorteioOnline.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +15,15 @@ import java.util.Optional;
 public class SorteioService {
 
     private SorteioRepository sorteioRepository;
-    private UserRepository userRepository;
+    private UsuarioRepository userRepository;
 
-    public SorteioService(SorteioRepository sorteioRepository, UserRepository userRepository) {
+    public SorteioService(SorteioRepository sorteioRepository, UsuarioRepository userRepository) {
         this.sorteioRepository = sorteioRepository;
         this.userRepository = userRepository;
     }
 
     public SorteioModel addSorteio(SorteioRequestDTO dadosSorteio){
-        UserModel criador = userRepository.findById(dadosSorteio.criadorId())
+        UsuarioModel criador = userRepository.findById(dadosSorteio.criadorId())
                 .orElseThrow(() -> new RuntimeException("user nao encontrado"));
 
         SorteioModel sorteio = new SorteioModel();

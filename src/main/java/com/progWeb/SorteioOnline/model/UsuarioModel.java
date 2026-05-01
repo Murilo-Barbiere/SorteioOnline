@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "usuario")
-public class UserModel implements UserDetails{
+public class UsuarioModel implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
