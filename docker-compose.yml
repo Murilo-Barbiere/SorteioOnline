@@ -17,3 +17,12 @@ services:
       - "8090:80"
     depends_on:
       - postgresql
+  api:
+    container_name: 'sorteio_online_api'
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/meu_banco
