@@ -22,8 +22,9 @@ public class SorteioController {
     }
 
     @PostMapping
-    public ResponseEntity<SorteioModel> cria(@RequestBody SorteioRequestDTO dadosSorteio){
-        SorteioModel novoSorteio = sorteioService.addSorteio(dadosSorteio);
+    public ResponseEntity<SorteioModel> cria(@AuthenticationPrincipal JWTUserData jwtUserData,
+                                             @RequestBody SorteioRequestDTO dadosSorteio){
+        SorteioModel novoSorteio = sorteioService.addSorteio(jwtUserData, dadosSorteio);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoSorteio);
     }
 

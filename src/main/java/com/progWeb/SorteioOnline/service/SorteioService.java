@@ -23,8 +23,8 @@ public class SorteioService {
     }
 
     //refatorar isso
-    public SorteioModel addSorteio(SorteioRequestDTO dadosSorteio){
-        UsuarioModel criador = userRepository.findById(dadosSorteio.criadorId())
+    public SorteioModel addSorteio(JWTUserData jwtUserData, SorteioRequestDTO dadosSorteio){
+        UsuarioModel criador = userRepository.findById(jwtUserData.userId())
                 .orElseThrow(() -> new RuntimeException("user nao encontrado"));
 
         SorteioModel sorteio = new SorteioModel();
@@ -43,7 +43,6 @@ public class SorteioService {
         return sorteioRepository.findById(id);
     }
 
-    //testa isso dps
     public boolean deleteSorteio(Long idSorteio, JWTUserData jwtUserData){
         SorteioModel sorteio = sorteioRepository.findById(idSorteio)
                 .orElseThrow(() -> new RuntimeException("user nao nao existente"));
@@ -55,7 +54,6 @@ public class SorteioService {
         return true;
     }
 
-    //alterar se mais atributos em sorteioModel
     public boolean atualiza(Long id, SorteioRequestDTO novoSorteio, JWTUserData jwtUserData){
         SorteioModel sorteio = sorteioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("user nao nao existente"));
