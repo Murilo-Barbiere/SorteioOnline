@@ -68,7 +68,7 @@ public class SorteioController {
         return ResponseEntity.ok("sorteio encerrado");
     }
 
-    @GetMapping("/participa/{id}")
+    @PostMapping("/participa/{id}")
     public ResponseEntity<String> getParticipantes(@PathVariable("id") Long idSorteio,
                                                       @AuthenticationPrincipal JWTUserData userData){
         sorteioService.participar(idSorteio, userData);
