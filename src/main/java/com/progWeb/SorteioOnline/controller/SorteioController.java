@@ -4,6 +4,7 @@ import com.progWeb.SorteioOnline.DTO.JWTUserData;
 import com.progWeb.SorteioOnline.DTO.Response.UsuarioResposeDTO;
 import com.progWeb.SorteioOnline.DTO.request.SorteioRequestDTO;
 import com.progWeb.SorteioOnline.model.SorteioModel;
+import com.progWeb.SorteioOnline.model.UsuarioModel;
 import com.progWeb.SorteioOnline.service.SorteioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,5 +80,11 @@ public class SorteioController {
     public List<UsuarioResposeDTO> listaParticipantes(@PathVariable("id") Long idSorteio,
                                                       @AuthenticationPrincipal JWTUserData userData){
         return sorteioService.getParticipantes(idSorteio, userData);
+    }
+
+    @GetMapping("/sortear/{id}")
+    public UsuarioResposeDTO sortearUsuairo(@PathVariable("id") Long idSorteio,
+                                                       @AuthenticationPrincipal JWTUserData userData){
+        return sorteioService.sortear(idSorteio, userData);
     }
 }

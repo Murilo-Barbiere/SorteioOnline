@@ -9,16 +9,17 @@ import com.progWeb.SorteioOnline.model.UsuarioModel;
 import com.progWeb.SorteioOnline.repository.SorteioRepository;
 import com.progWeb.SorteioOnline.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class SorteioService {
 
     private SorteioRepository sorteioRepository;
     private UsuarioRepository userRepository;
+
 
     public SorteioService(SorteioRepository sorteioRepository, UsuarioRepository userRepository) {
         this.sorteioRepository = sorteioRepository;
@@ -113,5 +114,29 @@ public class SorteioService {
         }
 
         return sorteioRepository.findParticipantes(idSorteio);
+    }
+
+    public UsuarioResposeDTO sortear(Long idSorteio, JWTUserData userData){
+        SorteioModel sorteio = sorteioRepository.findById(idSorteio)
+                .orElseThrow(() -> new RuntimeException("Sorteio nao existente"));
+
+        if(sorteio.getParticipantes().isEmpty()) throw new RuntimeException("Sorteio sem participantes");
+
+        if(sorteio.getStatusSorteio() == StatusSorteio.encerrado) throw new RuntimeException("Sorteio encerrado");
+
+        boolean isCriador = userData.userId().equals(sorteio.getCriador().getId());
+        boolean isAdmin   = userData.role().equals("ROLE_ADMIN");
+        if(!isCriador && !isAdmin){
+            throw new RuntimeException("nao autorizado");
+        }
+
+        Random random = new Random();
+
+        sorteio.setStatusSorteio(StatusSorteio.encerrado);
+        sorteioRepository.save(sorteio);
+
+        UsuarioModel userGanhador = sorteio.getParticipantes().get(random.nextInt(sorteio.getParticipantes().size()));
+
+        return new UsuarioResposeDTO(userGanhador.getId(), userGanhador.getNome(), userGanhador.getEmail());
     }
 }

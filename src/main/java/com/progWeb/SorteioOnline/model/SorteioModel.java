@@ -29,5 +29,5 @@ public class SorteioModel {
 
     @ManyToMany(mappedBy = "sorteiosParticipando")
     @JsonIgnore
-    private List<UsuarioModel> participante = new ArrayList<>();
+    private List<UsuarioModel> participantes = new ArrayList<>();
 }
